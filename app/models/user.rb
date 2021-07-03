@@ -11,12 +11,12 @@ class User < ApplicationRecord
 
   validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
   validates :introduction, length: {maximum: 50}
-  
+
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :follower
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
-  
+
   def follow(user_id)
     relationships.create(followed_id: user_id)
   end
@@ -26,5 +26,17 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-  
+
+  def self.looks(method, words)
+    if method == "perfect"
+      @user = User.where("name Like ?", "#{words}")
+    elsif method == "forward"
+      @user = User.where("name Like ?", "#{words}%")
+    elsif method == "backward"
+      @user = User.where("name Like ?", "%#{words}")
+    else
+      @user = User.where("name Like ?", "%#{words}%")
+    end
+  end
+
 end

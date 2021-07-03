@@ -1,0 +1,22 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class="col">
+
+      <% if @range == "User" %>
+        <h2>Users search for <%= @word %></h2>
+          <% if @users.exists? %>
+            <%= render 'users/index',users: @users %>
+          <% else %>
+            <p>お探しのUserは見つかりませんでした。<br>別のキーワードでお試しください。</p>
+          <% end %>
+      <% else %>
+        <h2>Books search for <%= "#{@word}" %></h2>
+          <% if @books.exists? %>
+            <%= render 'books/index',users: @users %>
+          <% else %>
+            <p>お探しのBookは見つかりませんでした。<br>別のキーワードでお試しください。</p>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
