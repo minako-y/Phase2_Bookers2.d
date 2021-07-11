@@ -41,6 +41,7 @@ class BooksController < ApplicationController
     redirect_to books_path
   end
 
+
   private
 
   def book_params
