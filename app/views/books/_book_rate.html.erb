@@ -1,21 +1,26 @@
-<div class="book-rate" data-score="<%= book.rate %>"></div>
+<div class="star_rate_<%= book.id %>"></div>
 <script>
-  $('.book-rate').empty();
-  $('.book-rate').raty({
-    readOnly: true,
-    score: function() {
-      $(this).attr('data-score');
-    },
-    path: '/assets/'
+  $('.star_rate_<%= book.id %>').empty();
+  $(".star_rate_<%= book.id %>").raty({
+    size: 36,
+    starOff: '<%= asset_path('star-off.png') %>',
+    starOn: '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    half: true,
+    score: <%= book.rate %>,
+    readOnly: true
   });
-  // ダメだった記述（星すら表示されずbookのrateはnilになってた。なぜかはまだわからん）
-  // $("star-rate-<%= book.id %>").raty({
-  //   size: 36,
-  //   starOff: '<%= asset_path('star-off.png') %>',
-  //   starOn: '<%= asset_path('star-on.png') %>',
-  //   starHalf: '<%= asset_path('star-half.png') %>',
-  //   half: true,
-  //   score: <%= book.rate %>,
-  //   readOnly: true
-  // });
-</script>
+  </script>
+
+<!--これでもいける-->
+<!--<div class="book-rate" data-score="<%= book.rate %>"></div>-->
+<!--<script>-->
+<!--  $('.book-rate').empty();-->
+<!--  $('.book-rate').raty({-->
+<!--    readOnly: true,-->
+<!--    score: function() {-->
+<!--      $(this).attr('data-score');-->
+<!--    },-->
+<!--    path: '/assets/'-->
+<!--  });-->
+<!--</script>-->
