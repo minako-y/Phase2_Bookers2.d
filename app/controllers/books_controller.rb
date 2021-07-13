@@ -9,8 +9,14 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
     @book = Book.new
+    if params[:sort_create]
+      @books = Book.order(created_at: :desc)
+    elsif params[:sort_rate]
+      @books = Book.order(rate: :desc)
+    else
+      @books = Book.all
+    end
   end
 
   def create
