@@ -19,7 +19,7 @@
         <td><%= link_to book.title, book_path(book), class: "book_#{book.id}" %></td>
         <td><%= book.body %></td>
         <td>
-          <%= link_to books_path(category_sort: book.category) do %>
+          <%= link_to books_path(category_search: book.category) do %>
             <%= book.category %>
           <% end %>
         </td>

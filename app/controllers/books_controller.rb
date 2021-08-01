@@ -14,6 +14,9 @@ class BooksController < ApplicationController
       @books = Book.order(created_at: :desc)
     elsif params[:sort_rate]
       @books = Book.order(rate: :desc)
+    elsif category_search?
+      category = params[:category_search]
+      @books = Book.where(category: category)
     else
       @books = Book.all
     end
@@ -59,5 +62,9 @@ class BooksController < ApplicationController
       redirect_to books_path
     end
   end
-
+  
+  def category_search?
+    params[:category_search].present?
+  end
+  
 end
